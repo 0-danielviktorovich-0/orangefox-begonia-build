@@ -18,7 +18,7 @@ on:
       device_branch:
         description: 'Device tree branch (unified = dynamic+erofs + FBEv2 decryption / non-dynamic+ext4-f2fs)'
         required: false
-        default: 'unified'
+        default: 'unified-svarog'
       jobs:
         description: 'Parallel make jobs'
         required: false
@@ -42,7 +42,7 @@ permissions:
 env:
   FOX_SYNC_URL: 'https://gitlab.com/OrangeFox/sync.git'
   FOX_SYNC_BRANCH: ${{ github.event.inputs.fox_branch || '12.1' }}
-  DEVICE_TREE_URL: 'https://github.com/methylphetamine/device_xiaomi_begonia-orangefox.git'
+  DEVICE_TREE_URL: 'https://github.com/0-danielviktorovich-0/device_xiaomi_begonia-orangefox.git'
   DEVICE_TREE_BRANCH: ${{ github.event.inputs.device_branch || 'unified' }}
   SRC_DIR: 'aosp'
   FOX_BUILD_TYPE: 'Unofficial'
@@ -191,8 +191,8 @@ jobs:
           BUILD_JOBS: ${{ inputs.jobs || '4' }}
           MAKEFILE_NAME: ${{ inputs.makefile || 'twrp_begonia-eng' }}
           BUILD_TARGET: ${{ inputs.build_target || 'recoveryimage' }}
-          BUILD_USERNAME: methylphetamine
-          BUILD_HOSTNAME: poxproject
+          BUILD_USERNAME: 0-danielviktorovich-0
+          BUILD_HOSTNAME: svarog
           FOX_BUILD_DEVICE: begonia
           FOX_BUILD_TYPE: Unofficial
         run: |
@@ -231,8 +231,8 @@ jobs:
           echo "Using TARGET_PRODUCT=$TARGET_PRODUCT TARGET_BUILD_VARIANT=$TARGET_BUILD_VARIANT"
 
           mka "$BUILD_TARGET" -j"$BUILD_JOBS" \
-            BUILD_USERNAME=methylphetamine \
-            BUILD_HOSTNAME=poxproject 2>&1 | tee -a build.log
+            BUILD_USERNAME=0-danielviktorovich-0 \
+            BUILD_HOSTNAME=svarog 2>&1 | tee -a build.log
 
       - name: Locate and verify output image
         id: image
